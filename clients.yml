@@ -10,7 +10,7 @@
 
     - name: validate client read permissions on monitors
       fail:
-        msg: 'WRONG PERMISSIONS BUTTHEAD'
+        msg: "The client's permissions are incorrectly set"
       when: not (client_info.stdout|from_json)[0].caps.mon | search("allow r")
 
     - name: validate client permissions on pools
