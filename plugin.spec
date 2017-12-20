@@ -1,7 +1,7 @@
 ---
 plugin_type: test
 subparsers:
-    jorden:
+    jordan:
         description:
         include_groups: ["Ansible options", "Inventory", "Common options", "Answers file"]
         groups:
