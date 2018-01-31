@@ -7,8 +7,14 @@
       become: true
       register: ceph_status
       run_once: yes
+      tags:
+        - monitors
+        - sanity
 
     - name: validate monitors health status
       include: tasks/check_monitors_health.yml
       with_items: "{{ (ceph_status.stdout|from_json).health.timechecks.mons }}"
       run_once: yes
+      tags:
+        - monitors
+        - sanity

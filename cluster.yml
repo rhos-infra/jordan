@@ -7,9 +7,15 @@
       become: true
       register: cluster_status
       run_once: yes
+      tags:
+        - cluster
+        - sanity
 
     - name: Check cluster's health
       fail:
         msg: "The cluster is not healthy, the cluster status is: {{ (cluster_status.stdout|from_json).health.overall_status }}"
       when: ((cluster_status.stdout|from_json).health.overall_status == "HEALTH_ERR")
       run_once: yes
+      tags:
+        - cluster
+        - sanity
