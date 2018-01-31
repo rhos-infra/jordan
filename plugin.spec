@@ -5,19 +5,9 @@ subparsers:
         description:
         include_groups: ["Ansible options", "Inventory", "Common options", "Answers file"]
         groups:
-          - title: Cluster Tests
-            options:
-                check-cluster:
-                    type: Bool
-                    help: Specify whether to run Ceph cluster validation
-                    default: True
 
           - title: Ceph monitor nodes
             options:
-                check-monitors:
-                    type: Bool
-                    help: Specify whether to run monitor services validation
-                    default: True
 
                 monitor-nodes:
                     type: Value
@@ -26,10 +16,6 @@ subparsers:
 
           - title: Ceph OSD nodes
             options:
-                check-osds:
-                    type: Bool
-                    help: Specify whether to run OSDs services validation
-                    default: True
 
                 osds-number:
                     type: Value
@@ -38,10 +24,6 @@ subparsers:
 
           - title: Ceph pools
             options:
-                check-pools:
-                    type: Bool
-                    help: Specify whether to run pools parameters validation
-                    default: True
 
                 ceph-pools:
                     type: Value
@@ -70,10 +52,6 @@ subparsers:
 
           - title: Ceph clients
             options:
-                check-clients:
-                    type: Bool
-                    help: Specify whether to run Ceph clients validation
-                    default: True
 
                 openstack-client-name:
                     type: Value
