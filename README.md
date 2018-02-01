@@ -9,12 +9,10 @@ The tests are separated by sections:
   - client permissions
 
 usage:
-infrared jordan --check-cluster true \
-                --check-monitors true \
-                --check-osds true \
-                --check-clients true \
-                --ceph-pools <pool>,<pool>,... \
-                --pool-pg_num 32 \
-                --pool-pgp_num 32 \
+infrared jordan \
+                --ceph-pools [pool],[pool]... \
+                --pool-pg_num 128 \
+                --pool-pgp_num 128 \
                 --pool-size 3 \
-                --openstack-client-name <client>
+                --pool-min_size 2 \
+                --openstack-client-name [opensatck]
