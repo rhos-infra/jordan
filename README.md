@@ -8,14 +8,23 @@ The tests are separated by sections:
   - pool configuration
   - client permissions
 
-usage:
-infrared jordan --monitor-nodes controller\
-                --ceph-pools volumes,vms,images,... \
-                --osds-number 5 \
-                --pool-pg_num 32 \
-                --pool-pgp_num 32 \
-                --pool-size 3 \
-                --pool-min_size 1 \
-                --openstack-client-name openstack \
-                # for Ceph 3.x
+# for Ceph 2.x
+infrared jordan --monitor-nodes controller /\
+                --ceph-pools volumes,vms,images,... /\
+                --osds-number 5 /\
+                --pool-pg_num 32 /\
+                --pool-pgp_num 32 /\
+                --pool-size 3 /\
+                --pool-min_size 1 /\
+                --openstack-client-name openstack 
+
+# for Ceph 3.x
+infrared jordan --monitor-nodes controller /\
+                --ceph-pools volumes,vms,images,... /\
+                --osds-number 5 /\
+                --pool-pg_num 32 /\
+                --pool-pgp_num 32 /\
+                --pool-size 3 /\
+                --pool-min_size 1 /\
+                --openstack-client-name openstack /\
                 --ansible-args "skip-tags=monitors"
