@@ -9,12 +9,13 @@ The tests are separated by sections:
   - client permissions
 
 usage:
-infrared jordan --check-cluster true \
-                --check-monitors true \
-                --check-osds true \
-                --check-clients true \
-                --ceph-pools <pool>,<pool>,... \
+infrared jordan --monitor-nodes controller\
+                --ceph-pools volumes,vms,images,... \
+                --osds-number 5 \
                 --pool-pg_num 32 \
                 --pool-pgp_num 32 \
                 --pool-size 3 \
-                --openstack-client-name <client>
+                --pool-min_size 1 \
+                --openstack-client-name openstack \
+                # for Ceph 3.x
+                --ansible-args "skip-tags=monitors"
