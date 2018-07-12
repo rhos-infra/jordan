@@ -6,6 +6,12 @@ subparsers:
         include_groups: ["Ansible options", "Inventory", "Common options", "Answers file"]
         groups:
 
+          - title: Ceph cluster
+            options:
+                ceph-version:
+                    type: Value
+                    help: Ceph's major version
+                    
           - title: Ceph monitor nodes
             options:
 
