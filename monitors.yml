@@ -11,10 +11,20 @@
         - monitors
         - sanity
 
-    - name: validate monitors health status
+    - name: validate monitors health status for ceph2.x
       include: tasks/check_monitors_health.yml
       with_items: "{{ (ceph_status.stdout|from_json).health.timechecks.mons }}"
       run_once: yes
       tags:
         - monitors
         - sanity
+        - ceph-2
+
+    - name: validate monitors health status for ceph3.x
+      include: tasks/check_monitors_health.yml
+      with_items: "{{ (ceph_status.stdout|from_json).health.status }}"
+      run_once: yes
+      tags:
+        - monitors
+        - sanity
+        - ceph-3

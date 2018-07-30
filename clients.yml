@@ -10,14 +10,7 @@
       tags:
         - clients
         - sanity
-
-    - name: validate client read permissions on monitors
-      fail:
-        msg: "The client's permissions are incorrectly set"
-      when: not (client_info.stdout|from_json)[0].caps.mon | search("allow r")
-      tags:
-        - clients
-        - sanity
+        - ceph-2
 
     - name: validate client permissions on pools
       include: tasks/check_client_permissions.yml variable='client_info'
@@ -25,3 +18,4 @@
       tags:
         - clients
         - sanity
+        - ceph-2
