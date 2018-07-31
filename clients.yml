@@ -13,7 +13,7 @@
         - ceph-2
 
     - name: validate client permissions on pools
-      include: tasks/check_client_permissions.yml variable='client_info'
+      include: tasks/check_client_permissions_ceph2.yml
       with_items: "{{ test.ceph.pools.split(',') }}"
       tags:
         - clients

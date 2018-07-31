@@ -12,7 +12,7 @@
         - sanity
 
     - name: validate monitors health status for ceph2.x
-      include: tasks/check_monitors_health.yml
+      include: tasks/check_monitors_health_ceph2.yml
       with_items: "{{ (ceph_status.stdout|from_json).health.timechecks.mons }}"
       run_once: yes
       tags:
@@ -21,7 +21,7 @@
         - ceph-2
 
     - name: validate monitors health status for ceph3.x
-      include: tasks/check_monitors_health.yml
+      include: tasks/check_monitors_health_ceph3.yml
       with_items: "{{ (ceph_status.stdout|from_json).health.status }}"
       run_once: yes
       tags:
