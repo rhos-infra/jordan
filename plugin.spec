@@ -34,7 +34,7 @@ subparsers:
                 ceph-pools:
                     type: Value
                     help: the names of the deployed pools
-                    default: volumes,images,vms,metrics,backups
+                    default: volumes,images,vms,backups
 
                 pool-pg_num:
                     type: Value
