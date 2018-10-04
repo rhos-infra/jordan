@@ -5,16 +5,16 @@
   when: item.health != "HEALTH_OK"
   run_once: yes
   tags:
-    - non-containerized
+    - ceph-2
     - monitors
     - sanity
 
-- name: is monitor health ok
+- name: is containerized monitor health ok
   fail:
     msg: 'the monitor status is: {{ item }}'
   when: item != "HEALTH_OK"
   run_once: yes
   tags:
-    - containerized
-    - sanity
+    - ceph-3
     - monitors
+    - sanity

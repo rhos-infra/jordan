@@ -4,6 +4,16 @@
   become: true
   run_once: yes
   register: size
+  tags:
+    - non-containerized
+
+- name: get pool's size
+  shell: "docker exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} size --format json"
+  become: true
+  run_once: yes
+  register: size
+  tags:
+    - containerized
 
 - name: is size equal to value
   fail:
@@ -16,6 +26,16 @@
   become: true
   run_once: yes
   register: min_size
+  tags:
+    - non-containerized
+
+- name: get pool's min_size
+  shell: "docker exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} min_size --format json"
+  become: true
+  run_once: yes
+  register: min_size
+  tags:
+    - containerized
 
 - name: is min_size equal to value
   fail:

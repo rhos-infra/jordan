@@ -2,15 +2,6 @@
 - name: validate ceph osds status
   hosts: "{{ test.monitor.nodes }}"
   tasks:
-    - name: Get number of OSDs in cluster
-      shell: "ceph status --format json"
-      become: yes
-      register: cluster_status
-      run_once: yes
-      tags:
-        - osds
-        - sanity
-
     - name: check OSDs were created
       fail:
         msg: "number of OSDs is {{ (cluster_status.stdout|from_json).osdmap.osdmap.num_osds }}"
@@ -28,6 +19,17 @@
       tags:
         - osds
         - sanity
+        - non-containerized
+
+    - name: get osds list
+      shell: "docker exec ceph-mon-`hostname -s` ceph osd tree --format json"
+      become: true
+      register: osds_list
+      run_once: yes
+      tags:
+        - osds
+        - sanity
+        - containerized
 
     - name: check osds status
       include: tasks/check_osds_status.yml

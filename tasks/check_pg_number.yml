@@ -4,6 +4,16 @@
   become: true
   run_once: yes
   register: pg_num
+  tags:
+    - non-containerized
+
+- name: get pool's pg_num
+  shell: "docker exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} pg_num --format json"
+  become: true
+  run_once: yes
+  register: pg_num
+  tags:
+    - containerized
 
 - name: is pg_num equal to value
   fail:
@@ -16,6 +26,17 @@
   become: true
   run_once: yes
   register: pgp_num
+  tags:
+    - non-containerized
+
+- name: get pool's pg_num
+  shell: "docker exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} pgp_num --format json"
+  become: true
+  run_once: yes
+  register: pgp_num
+  tags:
+    - containerized
+
 
 - name: is pgp_num equal to value
   fail:

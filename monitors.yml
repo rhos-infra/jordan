@@ -2,29 +2,20 @@
 - name: ceph monitor validation tests
   hosts: "{{ test.monitor.nodes }}"
   tasks:
-    - name: get monitors status
-      shell: 'ceph status --format json'
-      become: true
-      register: ceph_status
-      run_once: yes
-      tags:
-        - monitors
-        - sanity
-
     - name: validate monitors health status for ceph2.x
       include: tasks/check_monitors_health_ceph.yml
-      with_items: "{{ (ceph_status.stdout|from_json).health.timechecks.mons }}"
+      with_items: "{{ (cluster_status.stdout|from_json).health.timechecks.mons }}"
       run_once: yes
       tags:
         - monitors
         - sanity
-        - non-containerized
+        - ceph-2
 
     - name: validate monitors health status for ceph3.x
       include: tasks/check_monitors_health_ceph.yml
-      with_items: "{{ (ceph_status.stdout|from_json).health.status }}"
+      with_items: "{{ (cluster_status.stdout|from_json).health.status }}"
       run_once: yes
       tags:
         - monitors
         - sanity
-        - containerized
+        - ceph-3

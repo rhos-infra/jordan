@@ -9,7 +9,20 @@
       run_once: yes
       tags:
         - cluster
-        - sanity  
+        - sanity
+
+- name: Check cluster status in a containerized environment
+  hosts: "{{ test.monitor.nodes }}"
+  tasks:
+    - name: collect Ceph cluster status
+      shell: "docker exec ceph-mon-`hostname -s` ceph --status --forma json"
+      become: true
+      register: cluster_status
+      run_once: yes
+      tags:
+        - cluster
+        - sanity
+        - containerized
 
     - name: Check cluster's health
       fail:
