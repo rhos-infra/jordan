@@ -12,10 +12,19 @@
         - sanity
         - non-containerized
 
+    - name: get openstack's services client details
+      shell: 'docker exec ceph-mon-`hostname -s` ceph auth get client.openstack --format json'
+      become: true
+      register: client_info
+      run_once: yes
+      tags:
+        - clients
+        - sanity
+        - containerized
+
     - name: validate client permissions on pools
-      include: tasks/check_client_permissions_ceph2.yml
+      include: tasks/check_client_permissions.yml
       with_items: "{{ test.ceph.pools.split(',') }}"
       tags:
         - clients
         - sanity
-        - non-containerized
