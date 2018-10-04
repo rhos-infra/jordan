@@ -8,7 +8,6 @@
       register: cluster_status
       run_once: yes
       tags:
-        - cluster
         - sanity
         - non-containerized
 
@@ -21,7 +20,6 @@
       register: cluster_status
       run_once: yes
       tags:
-        - cluster
         - sanity
         - containerized
 
