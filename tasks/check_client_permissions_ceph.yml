@@ -6,7 +6,8 @@
   tags:
     - clients
     - sanity
-    - ceph-2
+    - non-containerized
+    - ceph-2.x
 
 - name: check client permissions on pool
   fail:
@@ -16,4 +17,5 @@
   tags:
     - clients
     - sanity
-    - ceph-2
+    - non-containerized
+    - ceph-2.x

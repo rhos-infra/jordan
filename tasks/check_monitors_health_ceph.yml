@@ -1,0 +1,20 @@
+---
+- name: is monitor health ok
+  fail:
+    msg: 'the monitor {{ item.name }} status is: {{ item.health }}'
+  when: item.health != "HEALTH_OK"
+  run_once: yes
+  tags:
+    - non-containerized
+    - monitors
+    - sanity
+
+- name: is monitor health ok
+  fail:
+    msg: 'the monitor status is: {{ item }}'
+  when: item != "HEALTH_OK"
+  run_once: yes
+  tags:
+    - containerized
+    - sanity
+    - monitors

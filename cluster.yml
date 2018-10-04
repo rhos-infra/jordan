@@ -9,7 +9,7 @@
       run_once: yes
       tags:
         - cluster
-        - sanity
+        - sanity  
 
     - name: Check cluster's health
       fail:

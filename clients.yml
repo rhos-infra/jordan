@@ -10,7 +10,7 @@
       tags:
         - clients
         - sanity
-        - ceph-2
+        - non-containerized
 
     - name: validate client permissions on pools
       include: tasks/check_client_permissions_ceph2.yml
@@ -18,4 +18,4 @@
       tags:
         - clients
         - sanity
-        - ceph-2
+        - non-containerized
