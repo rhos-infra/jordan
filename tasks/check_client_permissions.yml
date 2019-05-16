@@ -45,3 +45,31 @@
     - clients
     - sanity
     - ceph-3
+
+- name: validate client read permissions on manager
+  fail:
+    msg: "The client's permissions are incorrectly set"
+  when: not (client_info.stdout|from_json)[0].caps.mgr | search("allow *")
+  tags:
+    - clients
+    - sanity
+    - ceph-4
+
+- name: validate client read permissions on monitors
+  fail:
+    msg: "The client's permissions are incorrectly set"
+  when: not (client_info.stdout|from_json)[0].caps.mon | search("profile rbd")
+  tags:
+    - clients
+    - sanity
+    - ceph-4
+
+- name: check client permissions on pool
+  fail:
+    msg: 'the client {{ test.openstack.client.name }} does not have the right permissions on pool {{ item }}'
+  when: not (client_info.stdout|from_json)[0].caps.osd | search("profile rbd pool={{ item }}" )
+  run_once: yes
+  tags:
+    - clients
+    - sanity
+    - ceph-4

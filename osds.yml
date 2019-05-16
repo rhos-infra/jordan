@@ -22,7 +22,7 @@
         - non-containerized
 
     - name: get osds list
-      shell: "docker exec ceph-mon-`hostname -s` ceph osd tree --format json"
+      shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd tree --format json"
       become: true
       register: osds_list
       run_once: yes
@@ -30,7 +30,17 @@
         - osds
         - sanity
         - containerized
-
+        - ceph-3
+    - name: get osds list
+      shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd tree --format json"
+      become: true
+      register: osds_list
+      run_once: yes
+      tags:
+        - osds
+        - sanity
+        - containerized
+        - ceph-4
     - name: check osds status
       include: tasks/check_osds_status.yml
       with_items: '{{ (osds_list.stdout|from_json).nodes }}'

@@ -11,6 +11,7 @@ subparsers:
                 ceph-version:
                     type: Value
                     help: Ceph's major version
+                    default: '3'
                     
           - title: Ceph monitor nodes
             options:
@@ -19,6 +20,12 @@ subparsers:
                     type: Value
                     help: The node type on which Ceph's monitors are running
                     default: controller
+          - title: Cpeh registry provider
+            options:
+                 ceph-reg-provider:
+                    type: Value
+                    help: docker for ceph v3 cnd podman for v4
+                    default: 'docker'
 
           - title: Ceph OSD nodes
             options:

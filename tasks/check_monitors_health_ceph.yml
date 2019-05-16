@@ -18,3 +18,13 @@
     - ceph-3
     - monitors
     - sanity
+
+- name: is containerized monitor health ok
+  fail:
+    msg: 'the monitor status is: {{ item }}'
+  when: item != "HEALTH_OK"
+  run_once: yes
+  tags:
+    - ceph-4
+    - monitors
+    - sanity

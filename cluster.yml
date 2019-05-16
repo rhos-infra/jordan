@@ -15,7 +15,7 @@
   hosts: "{{ test.monitor.nodes }}"
   tasks:
     - name: collect Ceph cluster status
-      shell: "docker exec ceph-mon-`hostname -s` ceph --status --format json"
+      shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph --status --format json"
       become: true
       register: cluster_status
       run_once: yes
@@ -23,7 +23,11 @@
         - sanity
         - containerized
 
-    - name: Check cluster's health
+#    - name: DEBUG
+#      debug:
+#        var: (cluster_status.stdout|from_json).health
+
+    - name: Check cluster's health for ceph-3
       fail:
         msg: "The cluster is not healthy, the cluster status is: {{ (cluster_status.stdout|from_json).health.overall_status }}"
       when: ((cluster_status.stdout|from_json).health.overall_status == "HEALTH_ERR")
@@ -31,3 +35,13 @@
       tags:
         - cluster
         - sanity
+        - ceph-3
+    - name: Check cluster's health for ceph-4
+      fail:
+        msg: "The cluster is not healthy, the cluster status is: {{ (cluster_status.stdout|from_json).health.overall_status }}"
+      when: ((cluster_status.stdout|from_json).health.status == "HEALTH_ERR")
+      run_once: yes
+      tags:
+        - cluster
+        - sanity
+        - ceph-4

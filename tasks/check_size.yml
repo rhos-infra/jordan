@@ -8,7 +8,7 @@
     - non-containerized
 
 - name: get pool's size
-  shell: "docker exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} size --format json"
+  shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} size --format json"
   become: true
   run_once: yes
   register: size
@@ -30,7 +30,7 @@
     - non-containerized
 
 - name: get pool's min_size
-  shell: "docker exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} min_size --format json"
+  shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} min_size --format json"
   become: true
   run_once: yes
   register: min_size
