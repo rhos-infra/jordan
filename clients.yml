@@ -1,6 +1,5 @@
 ---
 - name: ceph clients validation tests
-  vars_files: test_env.yml
   hosts: "{{ test.monitor.nodes }}"
   tasks:
     - name: get openstack's services client details
