@@ -11,6 +11,7 @@ subparsers:
                 ceph-version:
                     type: Value
                     help: Ceph's major version
+                    default: '3'
                     
           - title: Ceph monitor nodes
             options:

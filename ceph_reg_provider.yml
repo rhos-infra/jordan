@@ -1,0 +1,15 @@
+---
+- name: set registry provider
+  hosts: localhost
+  tasks:
+#    - name: Print version
+#      debug:
+#        var: test.ceph.version
+    #ceph-3 registry provider is docker whereas ceph-4 is podman
+    - name: Set correct registry provider for ceph 3
+      set_fact:
+        ceph_reg_provider: "{% if test.ceph.version | int >= 4 %} 'podman' {% else %} 'docker' {% endif %}"
+    #Container calls will use ceph_reg_provider
+#    - name: Print provider
+#      debug:
+#        var: ceph_reg_provider
