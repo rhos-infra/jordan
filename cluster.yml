@@ -15,7 +15,7 @@
   hosts: "{{ test.monitor.nodes }}"
   tasks:
     - name: collect Ceph cluster status
-      shell: "docker exec ceph-mon-`hostname -s` ceph --status --format json"
+      shell: "{{ceph_reg_provider}} exec ceph-mon-`hostname -s` ceph --status --format json"
       become: true
       register: cluster_status
       run_once: yes

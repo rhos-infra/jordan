@@ -1,5 +1,6 @@
 ---
 - name: ceph clients validation tests
+  vars_files: test_env.yml
   hosts: "{{ test.monitor.nodes }}"
   tasks:
     - name: get openstack's services client details
@@ -11,9 +12,8 @@
         - clients
         - sanity
         - non-containerized
-
     - name: get openstack's services client details
-      shell: 'docker exec ceph-mon-`hostname -s` ceph auth get client.openstack --format json'
+      shell: '{{ceph_reg_provider}} exec ceph-mon-`hostname -s` ceph auth get client.openstack --format json'
       become: true
       register: client_info
       run_once: yes
