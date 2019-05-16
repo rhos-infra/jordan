@@ -1,4 +1,6 @@
 ---
+# TODO implement on-the-fly - include: "{{ ceph_reg_provider | default('ceph_reg_provider.yml') }}"
+
 - include: "{{ cluster_check | default('cluster.yml') }}"
 
 - include: "{{ monitor_check | default('monitors.yml') }}"

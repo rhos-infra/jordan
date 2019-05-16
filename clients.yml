@@ -11,9 +11,8 @@
         - clients
         - sanity
         - non-containerized
-
     - name: get openstack's services client details
-      shell: 'docker exec ceph-mon-`hostname -s` ceph auth get client.openstack --format json'
+      shell: '{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph auth get client.openstack --format json'
       become: true
       register: client_info
       run_once: yes

@@ -8,7 +8,7 @@
     - non-containerized
 
 - name: get pool's pg_num
-  shell: "docker exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} pg_num --format json"
+  shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} pg_num --format json"
   become: true
   run_once: yes
   register: pg_num
@@ -30,7 +30,7 @@
     - non-containerized
 
 - name: get pool's pg_num
-  shell: "docker exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} pgp_num --format json"
+  shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} pgp_num --format json"
   become: true
   run_once: yes
   register: pgp_num
