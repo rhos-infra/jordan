@@ -20,11 +20,11 @@ subparsers:
                     type: Value
                     help: The node type on which Ceph's monitors are running
                     default: controller
-          - title: Cpeh registry provider
+          - title: Ceph registry provider
             options:
                  ceph-reg-provider:
                     type: Value
-                    help: docker for ceph v3 cnd podman for v4
+                    help: docker for ceph v3 and podman for v4
                     default: 'docker'
 
           - title: Ceph OSD nodes
