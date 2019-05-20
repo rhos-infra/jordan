@@ -10,6 +10,7 @@
         - monitors
         - sanity
         - ceph-2
+
     - name: validate monitors health status for ceph3.x
       include: tasks/check_monitors_health_ceph.yml
       with_items: "{{ (cluster_status.stdout|from_json).health.status }}"
@@ -18,6 +19,7 @@
         - monitors
         - sanity
         - ceph-3
+
     - name: validate monitors health status for ceph4.x
       include: tasks/check_monitors_health_ceph.yml
       with_items: "{{ (cluster_status.stdout|from_json).health.status }}"

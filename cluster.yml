@@ -36,6 +36,7 @@
         - cluster
         - sanity
         - ceph-3
+
     - name: Check cluster's health for ceph-4
       fail:
         msg: "The cluster is not healthy, the cluster status is: {{ (cluster_status.stdout|from_json).health.overall_status }}"
