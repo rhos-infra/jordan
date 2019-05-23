@@ -1,5 +1,7 @@
 ---
-# TODO implement on-the-fly - include: "{{ ceph_reg_provider | default('ceph_reg_provider.yml') }}"
+#TODO implement on-the-fly - include: "{{ ceph_reg_provider | default('ceph_reg_provider.yml') }}"
+#TODO include will be deprecated in 2.8. change to import_playbook
+#TODO Consider using "import_task" and passing an argument (calculate the registry provider here)
 
 - include: "{{ cluster_check | default('cluster.yml') }}"
 
