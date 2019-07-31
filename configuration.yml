@@ -1,0 +1,7 @@
+---
+- name: Configuration validation tests
+  tasks:
+    - name: Validate ceph keyring permissions BZ#1585149 regression
+      import_playbook: /tasks/check_keyring_permissions.yml
+      tags:
+        - configuration
