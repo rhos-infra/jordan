@@ -12,3 +12,5 @@
 - include: "{{ pools_check | default('pools.yml') }}"
 
 - include: "{{ client_check | default('clients.yml') }}"
+
+- import_playbook: "{{ configuration_check | default('configuration.yml') }}"
