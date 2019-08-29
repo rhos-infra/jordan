@@ -1,14 +1,13 @@
 ---
 #TODO implement on-the-fly - include: "{{ ceph_reg_provider | default('ceph_reg_provider.yml') }}"
-#TODO include will be deprecated in 2.8. change to import_playbook
 #TODO Consider using "import_task" and passing an argument (calculate the registry provider here)
 
-- include: "{{ cluster_check | default('cluster.yml') }}"
+- import_playbook: "{{ cluster_check | default('cluster.yml') }}"
 
-- include: "{{ monitor_check | default('monitors.yml') }}"
+- import_playbook: "{{ monitor_check | default('monitors.yml') }}"
 
-- include: "{{ osds_check | default('osds.yml') }}"
+- import_playbook: "{{ osds_check | default('osds.yml') }}"
 
-- include: "{{ pools_check | default('pools.yml') }}"
+- import_playbook: "{{ pools_check | default('pools.yml') }}"
 
-- include: "{{ client_check | default('clients.yml') }}"
+- import_playbook: "{{ client_check | default('clients.yml') }}"
