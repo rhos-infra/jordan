@@ -1,0 +1,24 @@
+---
+- name: does max_files have value of 32768
+  lineinfile:
+    path: /etc/libvirt/qemu.conf
+    line: "max_files = 32768"
+    state: present
+  check_mode: yes
+  register: conf
+  failed_when: (conf is changed) or (conf is failed)
+  tags:
+    - compute
+    - file_contents
+
+- name: does max_processes have value of 131072
+  lineinfile:
+    path: /etc/libvirt/qemu.conf
+    line: "max_processes = 131072"
+    state: present
+  check_mode: yes
+  register: conf
+  failed_when: (conf is changed) or (conf is failed)
+  tags:
+    - compute
+    - file_contents

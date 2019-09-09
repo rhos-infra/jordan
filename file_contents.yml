@@ -1,0 +1,10 @@
+---
+- name: file content validation tests
+  hosts: compute
+  become: true
+  tasks:
+    - name: validate the default values of max_files & max_processes parameters in /etc/libvirt/qemu.conf (BZ#1372589)
+      include: tasks/check_qemu_values.yml
+      tags:
+        - compute
+        - file_contents
