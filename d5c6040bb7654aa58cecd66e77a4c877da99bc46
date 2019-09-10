@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "881c25bd_7ec9bb8e",
+        "filename": "tasks/check_qemu_values.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1015407
+      },
+      "writtenOn": "2019-09-10T13:33:42Z",
+      "side": 1,
+      "message": "Does this need \"become\"?",
+      "range": {
+        "startLine": 2,
+        "startChar": 2,
+        "endLine": 2,
+        "endChar": 6
+      },
+      "revId": "d5c6040bb7654aa58cecd66e77a4c877da99bc46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d905f70_1b0ce804",
+        "filename": "tasks/check_qemu_values.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1015407
+      },
+      "writtenOn": "2019-09-10T13:33:42Z",
+      "side": 1,
+      "message": "Is this required? Why fail when conf is changed?.\nIf the task fails it would be because the file isn\u0027t there no?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "d5c6040bb7654aa58cecd66e77a4c877da99bc46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
