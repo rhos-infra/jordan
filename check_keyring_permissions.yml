@@ -1,0 +1,14 @@
+---
+- name: Get ceph keyring permission mask
+  stat:
+    path: /etc/ceph/ceph.client.openstack.keyring
+  register: st
+
+- name: Write stat module result for keyring file to console
+  debug:
+    var: st
+
+- name: test ceph keyring permission mask
+  fail:
+    msg: “Permission mask of ceph keyring is wrong”
+  when: st.stat.mode != "0600" or st.stat.uid != 167
