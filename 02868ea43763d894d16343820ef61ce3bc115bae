@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abc8e278_5f6cb77c",
+        "filename": "check_keyring_permissions.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1015407
+      },
+      "writtenOn": "2019-09-10T21:27:17Z",
+      "side": 1,
+      "message": "This should be commented out, it is for debuging purposes (for us, as we develop and troublehsoot this test)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 11
+      },
+      "revId": "02868ea43763d894d16343820ef61ce3bc115bae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
