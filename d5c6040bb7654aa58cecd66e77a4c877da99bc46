@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "cda7b206_39e2b36e",
+        "filename": "tasks/check_qemu_values.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1015407
+      },
+      "writtenOn": "2019-09-10T15:38:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bad642ae_22e96631",
+      "range": {
+        "startLine": 2,
+        "startChar": 2,
+        "endLine": 2,
+        "endChar": 6
+      },
+      "revId": "d5c6040bb7654aa58cecd66e77a4c877da99bc46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d905f70_1b0ce804",
         "filename": "tasks/check_qemu_values.yml",
         "patchSetId": 1
@@ -93,6 +117,30 @@
       "revId": "d5c6040bb7654aa58cecd66e77a4c877da99bc46",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06e7caee_916f6b4b",
+        "filename": "tasks/check_qemu_values.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1015407
+      },
+      "writtenOn": "2019-09-10T15:38:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "afcf8c2f_22bab7e2",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "d5c6040bb7654aa58cecd66e77a4c877da99bc46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
