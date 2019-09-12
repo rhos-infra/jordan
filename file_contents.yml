@@ -9,9 +9,6 @@
         - compute
         - file_contents
 
-- name: Configuration validation tests
-  hosts: compute
-  tasks:
     - name: Validate ceph keyring permissions BZ#1585149 regression
       include: tasks/check_keyring_permissions.yml
       tags:
