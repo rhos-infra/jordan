@@ -9,8 +9,9 @@
         - compute
         - file_contents
 
-    - name: Validate ceph keyring permissions BZ#1585149 regression
+    - name: Validate ceph keyring permissions (BZ#1734513)
       include: tasks/check_keyring_permissions.yml
       tags:
         - compute
         - file_contents
+        - containerized
