@@ -2,6 +2,8 @@
 - name: file content validation tests
   hosts: compute
   become: true
+  vars:
+    osd_memory_target: "{{ [1000000*ansible_memtotal_mb*0.2 / ((test.osds.number | int) / (test.pool.size | int)), 4294967296] | max }}"
   tasks:
     - name: validate the default values of max_files & max_processes parameters in /etc/libvirt/qemu.conf (BZ#1372589)
       include: tasks/check_qemu_values.yml
@@ -9,9 +11,27 @@
         - compute
         - file_contents
 
-    - name: Validate ceph keyring permissions (BZ#1734513)
+    - name: validate ceph keyring permissions (BZ#1734513)
       include: tasks/check_keyring_permissions.yml
       tags:
         - compute
         - file_contents
         - containerized
+
+    # - name: write calculation vars to console
+    #   debug:
+    #     msg:
+    #       - ansible_memtotal_mb: "{{ ansible_memtotal_mb }}"
+    #       - osds_number: "{{ test.osds.number }}"
+    #       - pool_size: "{{ test.pool.size }}"
+    #       - osd_memory_target: "{{ osd_memory_target }}"
+
+    - name: validate osd memory target in /etc/ceph/ceph.conf (BZ#1664112)
+      include: tasks/check_mem_target.yml
+      #TODO Remove 'ignore errors' when bug is REfixed (regression shown on Sept. 16, 2019)
+      ignore_errors: yes
+      tags:
+        - compute
+        - file_contents
+        - containerized
+        - HCI
