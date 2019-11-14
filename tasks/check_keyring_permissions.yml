@@ -4,9 +4,9 @@
     path: /etc/ceph/ceph.client.openstack.keyring
   register: st
 
-# - name: Write stat module result for keyring file to console
-#   debug:
-#     var: st
+- name: Write stat module result for keyring file to console
+  debug:
+    var: st
 
 - name: test ceph keyring permission mask
   fail:

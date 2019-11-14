@@ -23,9 +23,9 @@
         - sanity
         - containerized
 
-#    - name: DEBUG
-#      debug:
-#        var: (cluster_status.stdout|from_json).health
+   - name: DEBUG
+     debug:
+       var: (cluster_status.stdout|from_json).health
 
     - name: Check cluster's health for ceph-3
       fail:

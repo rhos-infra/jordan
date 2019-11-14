@@ -18,13 +18,13 @@
         - file_contents
         - containerized
 
-    # - name: write calculation vars to console
-    #   debug:
-    #     msg:
-    #       - ansible_memtotal_mb: "{{ ansible_memtotal_mb }}"
-    #       - osds_number: "{{ test.osds.number }}"
-    #       - pool_size: "{{ test.pool.size }}"
-    #       - osd_memory_target: "{{ osd_memory_target }}"
+    - name: write calculation vars to console
+      debug:
+        msg:
+          - ansible_memtotal_mb: "{{ ansible_memtotal_mb }}"
+          - osds_number: "{{ test.osds.number }}"
+          - pool_size: "{{ test.pool.size }}"
+          - osd_memory_target: "{{ osd_memory_target }}"
 
     - name: validate osd memory target in /etc/ceph/ceph.conf (BZ#1664112)
       include: tasks/check_mem_target.yml
