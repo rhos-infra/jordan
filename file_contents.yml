@@ -3,7 +3,7 @@
   hosts: compute
   become: true
   vars:
-    osd_memory_target: "{{ [1048576*ansible_memtotal_mb*0.2 / ((test.osds.number | int) / (test.pool.size | int)), 4294967296] | max }}"
+    osd_memory_target: "{{ [(1048576*ansible_memtotal_mb*0.2 / ((test.osds.number | int) / (test.pool.size | int))) | round(0, 'floor') | int, 4294967296] | max }}"
   tasks:
     - name: validate the default values of max_files & max_processes parameters in /etc/libvirt/qemu.conf (BZ#1372589)
       include: tasks/check_qemu_values.yml
@@ -28,8 +28,6 @@
 
     - name: validate osd memory target in /etc/ceph/ceph.conf (BZ#1664112)
       include: tasks/check_mem_target.yml
-      #TODO Remove 'ignore errors' when bug is REfixed (regression shown on Sept. 16, 2019)
-      ignore_errors: yes
       tags:
         - compute
         - file_contents
