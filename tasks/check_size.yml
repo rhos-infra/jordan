@@ -1,5 +1,5 @@
 ---
-- name: get pool's size
+- name: get pool's size (non-containerized)
   shell: "ceph osd pool get {{ item }} size --format json"
   become: true
   run_once: yes
@@ -7,7 +7,7 @@
   tags:
     - non-containerized
 
-- name: get pool's size
+- name: get pool's size (containerized)
   shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} size --format json"
   become: true
   run_once: yes
@@ -21,7 +21,7 @@
   when: (size.stdout|from_json).size != {{ test.pool.size }}
   run_once: yes
 
-- name: get pool's min_size
+- name: get pool's min_size (non-containerized)
   shell: "ceph osd pool get {{ item }} min_size --format json"
   become: true
   run_once: yes
@@ -29,7 +29,7 @@
   tags:
     - non-containerized
 
-- name: get pool's min_size
+- name: get pool's min_size (containerized)
   shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} min_size --format json"
   become: true
   run_once: yes

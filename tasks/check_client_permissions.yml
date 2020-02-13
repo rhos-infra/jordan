@@ -1,5 +1,5 @@
 ---
-- name: validate client read permissions on monitors
+- name: validate client read permissions on monitors (ceph2)
   fail:
     msg: "The client's permissions are incorrectly set"
   when: not (client_info.stdout|from_json)[0].caps.mon is search("allow r")
@@ -8,7 +8,7 @@
     - sanity
     - ceph-2
 
-- name: check client permissions on pool
+- name: check client permissions on pool (ceph2)
   fail:
     msg: 'the client {{ test.openstack.client.name }} does not have the right permissions on pool {{ item }}'
   when: not (client_info.stdout|from_json)[0].caps.osd is search("allow rwx pool={{ item }}" )
@@ -18,7 +18,7 @@
     - sanity
     - ceph-2
 
-- name: validate client read permissions on manager
+- name: validate client read permissions on manager (ceph3)
   fail:
     msg: "The client's permissions are incorrectly set"
   when: not (client_info.stdout|from_json)[0].caps.mgr is search("allow *")
@@ -27,7 +27,7 @@
     - sanity
     - ceph-3
 
-- name: validate client read permissions on monitors
+- name: validate client read permissions on monitors (ceph3)
   fail:
     msg: "The client's permissions are incorrectly set"
   when: not (client_info.stdout|from_json)[0].caps.mon is search("profile rbd")
@@ -36,7 +36,7 @@
     - sanity
     - ceph-3
 
-- name: check client permissions on pool
+- name: check client permissions on pool (ceph3)
   fail:
     msg: 'the client {{ test.openstack.client.name }} does not have the right permissions on pool {{ item }}'
   when: not (client_info.stdout|from_json)[0].caps.osd is search("profile rbd pool={{ item }}" )
@@ -46,7 +46,7 @@
     - sanity
     - ceph-3
 
-- name: validate client read permissions on manager
+- name: validate client read permissions on manager (ceph4)
   fail:
     msg: "The client's permissions are incorrectly set"
   when: not (client_info.stdout|from_json)[0].caps.mgr is search("allow *")
@@ -55,7 +55,7 @@
     - sanity
     - ceph-4
 
-- name: validate client read permissions on monitors
+- name: validate client read permissions on monitors (ceph4)
   fail:
     msg: "The client's permissions are incorrectly set"
   when: not (client_info.stdout|from_json)[0].caps.mon is search("profile rbd")
@@ -64,7 +64,7 @@
     - sanity
     - ceph-4
 
-- name: check client permissions on pool
+- name: check client permissions on pool (ceph4)
   fail:
     msg: 'the client {{ test.openstack.client.name }} does not have the right permissions on pool {{ item }}'
   when: not (client_info.stdout|from_json)[0].caps.osd is search("profile rbd pool={{ item }}" )

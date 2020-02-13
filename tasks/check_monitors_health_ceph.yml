@@ -9,7 +9,7 @@
     - monitors
     - sanity
 
-- name: is containerized monitor health ok
+- name: is containerized monitor health ok (ceph3)
   fail:
     msg: 'the monitor status is: {{ item }}'
   when: item != "HEALTH_OK"
@@ -19,7 +19,7 @@
     - monitors
     - sanity
 
-- name: is containerized monitor health ok
+- name: is containerized monitor health ok (ceph4)
   fail:
     msg: 'the monitor status is: {{ item }}'
   when: item != "HEALTH_OK"
