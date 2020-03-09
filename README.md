@@ -1,4 +1,4 @@
-# jordan
+# Jordan
 
 Jordan is an Infrared plugin testing the Ceph cluster, its state, its configuration and its topology.
 The tests are separated by sections, defined by `main.yml`:
@@ -9,7 +9,18 @@ The tests are separated by sections, defined by `main.yml`:
   - client permissions (`clients.yml`)
   - file content checks (`file_contents.yml`)
 
-# for Ceph 2.x
+## Tags [WIP]
+Jordan uses ansible tags to identify which tests to trigger during a run. Tags are used *exclusively* - you should be skipping tags for tests you do not want to run. A list of tags is below:
+
+- compute
+- undercloud
+- file_contents
+- containerized
+- HCI
+- dashboard
+
+## Generic Commands
+### for Ceph 2.x
 infrared jordan --monitor-nodes controller /\
                 --ceph-pools volumes,vms,images,... /\
                 --osds-number 5 /\
@@ -19,7 +30,7 @@ infrared jordan --monitor-nodes controller /\
                 --pool-min_size 1 /\
                 --openstack-client-name openstack 
 
-# for Ceph 3.x
+### for Ceph 3.x
 infrared jordan --monitor-nodes controller /\
                 --ceph-pools volumes,vms,images,... /\
                 --osds-number 5 /\
@@ -30,5 +41,5 @@ infrared jordan --monitor-nodes controller /\
                 --openstack-client-name openstack /\
                 --ansible-args "skip-tags=monitors"
 
-# for Ceph 4.x
+### for Ceph 4.x
 TODO

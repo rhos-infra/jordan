@@ -1,5 +1,5 @@
 ---
-- name: file content validation tests
+- name: compute file content validation tests
   hosts: compute
   become: true
   vars:
@@ -33,3 +33,15 @@
         - file_contents
         - containerized
         - HCI
+
+- name: undercloud file content validation tests
+  hosts: undercloud
+  become: true
+  tasks:
+    - name: validate ceph dashboard container images in /usr/share/openstack-tripleo-common/container-images/overcloud_containers.yaml (BZ#1785692)
+      include: tasks/check_dashboard_containers.yml
+      tags:
+        - undercloud
+        - file_contents
+        - containerized
+        - dashboard
