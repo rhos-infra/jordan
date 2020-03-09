@@ -1,0 +1,36 @@
+---
+- name: is grafana container endpoint correct
+  lineinfile:
+    path: /usr/share/openstack-tripleo-common/container-images/overcloud_containers.yaml
+    line: "- imagename: registry.redhat.io/rhceph/rhceph-3-dashboard-rhel7:3"
+    state: present
+  check_mode: yes
+  register: conf
+  failed_when: (conf is changed) or (conf is failed)
+
+- name: is promethus container endpoint correct
+  lineinfile:
+    path: /usr/share/openstack-tripleo-common/container-images/overcloud_containers.yaml
+    line: "- imagename: registry.redhat.io/openshift4/ose-prometheus:4.1"
+    state: present
+  check_mode: yes
+  register: conf
+  failed_when: (conf is changed) or (conf is failed)
+
+- name: is promethus alertmanager container endpoint correct
+  lineinfile:
+    path: /usr/share/openstack-tripleo-common/container-images/overcloud_containers.yaml
+    line: "- imagename: registry.redhat.io/openshift4/ose-prometheus-alertmanager:4.1"
+    state: present
+  check_mode: yes
+  register: conf
+  failed_when: (conf is changed) or (conf is failed)
+
+- name: is promethus node exporter container endpoint correct
+  lineinfile:
+    path: /usr/share/openstack-tripleo-common/container-images/overcloud_containers.yaml
+    line: "- imagename: registry.redhat.io/openshift4/ose-prometheus-node-exporter:v4.1"
+    state: present
+  check_mode: yes
+  register: conf
+  failed_when: (conf is changed) or (conf is failed)
