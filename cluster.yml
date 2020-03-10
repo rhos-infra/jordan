@@ -27,7 +27,7 @@
       lineinfile:
         path: "{{ test.output.file }}"
         line: "check ceph monitors health = failed"
-      when: ((cluster_status.stdout|from_json).health.overall_status != "HEALTH_OK")
+      when: ((cluster_status.stdout|from_json).health.status != "HEALTH_OK")
       delegate_to: undercloud-0
       run_once: yes
       tags:
@@ -39,7 +39,7 @@
       lineinfile:
         path: "{{ test.output.file }}"
         line: "check ceph monitors health = passed"
-      when: ((cluster_status.stdout|from_json).health.overall_status == "HEALTH_OK")
+      when: ((cluster_status.stdout|from_json).health.status == "HEALTH_OK")
       delegate_to: undercloud-0
       run_once: yes
       tags:
