@@ -1,0 +1,9 @@
+---
+- name: fetch result file
+  hosts: undercloud-0
+  tasks:
+  - name: fetch result file
+    fetch:
+      src: "{{ test.output.file }}"
+      dest: "{{ inventory_dir }}/"
+      flat: yes 

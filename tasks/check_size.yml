@@ -23,19 +23,7 @@
   when: (size.stdout|from_json).size != {{ test.pool.size }}
   run_once: yes
 
-<<<<<<< HEAD
 - name: get pool's min_size (non-containerized)
-=======
-- name: is size equal to value - passed
-  lineinfile:
-    path: "{{ test.output.file }}"
-    line: "check pool's size {{ item }} = passed"
-  delegate_to: undercloud-0
-  when: (size.stdout|from_json).size == {{ test.pool.size }}
-  run_once: yes
-
-- name: get pool's min_size
->>>>>>> f0431e3... add jordan-results.out file and submitting results
   shell: "ceph osd pool get {{ item }} min_size --format json"
   become: true
   run_once: yes
@@ -56,17 +44,4 @@
     path: "{{ test.output.file }}"
     line: "Set osd_pool_default_min_size automatically by Ceph {{ item }} = failed"
   when: (min_size.stdout|from_json).min_size != {{ test.pool.min_size }}
-<<<<<<< HEAD
   run_once: yes
-=======
-  delegate_to: undercloud-0
-  run_once: yes
-
-- name: is min_size equal to value - passed
-  lineinfile:
-    path: "{{ test.output.file }}"
-    line: "Set osd_pool_default_min_size automatically by Ceph {{ item }} = passed"
-  when: (min_size.stdout|from_json).min_size == {{ test.pool.min_size }}
-  delegate_to: undercloud-0
-  run_once: yes
->>>>>>> f0431e3... add jordan-results.out file and submitting results

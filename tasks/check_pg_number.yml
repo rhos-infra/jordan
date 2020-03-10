@@ -52,9 +52,6 @@
     path: "{{ test.output.file }}"
     line: "Check pg_num of a pool {{ item }} = failed"
   when: (pgp_num.stdout|from_json).pgp_num != {{ test.pool.pgp_num }}
-<<<<<<< HEAD
-  run_once: yes
-=======
   delegate_to: undercloud-0
   run_once: yes
 
@@ -65,4 +62,3 @@
   when: (pgp_num.stdout|from_json).pgp_num == {{ test.pool.pgp_num }}
   delegate_to: undercloud-0
   run_once: yes
->>>>>>> f0431e3... add jordan-results.out file and submitting results
