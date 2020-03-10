@@ -2,11 +2,24 @@
 - name: validate ceph osds status
   hosts: "{{ test.monitor.nodes }}"
   tasks:
-    - name: check OSDs were created
-      fail:
-        msg: "number of OSDs is {{ (cluster_status.stdout|from_json).osdmap.osdmap.num_osds }}"
+    - name: check OSDs were created - failed
+      lineinfile:
+        path: "{{ test.output.file }}"
+        line: "Check OSD how much created = failed"
       when: (cluster_status.stdout|from_json).osdmap.osdmap.num_osds != {{ test.osds.number }}
       run_once: yes
+      delegate_to: undercloud-0
+      tags:
+        - osds
+        - sanity
+      
+    - name: check OSDs were created - passed
+      lineinfile:
+        path: "{{ test.output.file }}"
+        line: "Check OSD how much created = passed"
+      when: (cluster_status.stdout|from_json).osdmap.osdmap.num_osds == {{ test.osds.number }}
+      run_once: yes
+      delegate_to: undercloud-0
       tags:
         - osds
         - sanity

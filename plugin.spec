@@ -58,3 +58,9 @@ subparsers:
                     type: Value
                     help: the name of the client set for the Openstack services
                     default: openstack
+          - title: Logs
+            options:
+                output-file:
+                    type: Value
+                    help: name of the output file
+                    default: /home/stack/jordan-results.out

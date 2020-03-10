@@ -1,10 +1,32 @@
 ---
-- name: is osd up
-  fail:
-    msg: '{{ item.name }} status is {{ item.status }}'
+- name: is osd up - failed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "Check OSD are up = failed"
+  delegate_to: undercloud-0
+  run_once: yes
   when: item.type == "osd" and item.status != "up"
 
-- name: is osd in
-  fail:
-    msg: '{{ item.name }} status is not in'
+- name: is osd up - passed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "Check OSD are up = passed"
+  delegate_to: undercloud-0
+  run_once: yes
+  when: item.type == "osd" and item.status == "up"
+
+- name: is osd in - failed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "check OSDs are in = failed"
+  delegate_to: undercloud-0
+  run_once: yes
   when: item.type == "osd" and item.reweight != 1
+  
+- name: is osd in - passed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "check OSDs are in = passed"
+  delegate_to: undercloud-0
+  run_once: yes
+  when: item.type == "osd" and item.reweight == 1

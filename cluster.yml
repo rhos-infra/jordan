@@ -23,24 +23,51 @@
         - sanity
         - containerized
 
-#    - name: DEBUG
-#      debug:
-#        var: (cluster_status.stdout|from_json).health
-
-    - name: Check cluster's health for ceph-3
-      fail:
-        msg: "The cluster is not healthy, the cluster status is: {{ (cluster_status.stdout|from_json).health.overall_status }}"
-      when: ((cluster_status.stdout|from_json).health.overall_status == "HEALTH_ERR")
+    - name: Cluster health check for ceph 3 failed
+      lineinfile:
+        path: "{{ test.output.file }}"
+        line: "check ceph monitors health = failed"
+      when: ((cluster_status.stdout|from_json).health.overall_status != "HEALTH_OK")
+      delegate_to: undercloud-0
+      run_once: yes
+      tags:
+        - cluster
+        - sanity
+        - ceph-3
+    
+    - name: Cluster health check for ceph 3 passed
+      lineinfile:
+        path: "{{ test.output.file }}"
+        line: "check ceph monitors health = passed"
+      when: ((cluster_status.stdout|from_json).health.overall_status == "HEALTH_OK")
+      delegate_to: undercloud-0
       run_once: yes
       tags:
         - cluster
         - sanity
         - ceph-3
 
-    - name: Check cluster's health for ceph-4
-      fail:
-        msg: "The cluster is not healthy, the cluster status is: {{ (cluster_status.stdout|from_json).health.status }}"
-      when: ((cluster_status.stdout|from_json).health.status == "HEALTH_ERR")
+    - name: Cluster health check for ceph 4 failed
+      register: health_check
+      lineinfile:
+        path: "{{ test.output.file }}"
+        line: "check ceph monitors health = failed"
+      when: ((cluster_status.stdout|from_json).health.status != "HEALTH_OK")
+      delegate_to: undercloud-0
+      run_once: yes
+      tags:
+        - cluster
+        - sanity
+        - ceph-4
+
+    - name: Cluster health check for ceph 4 passed
+      register: health_check
+      lineinfile:
+        path: "{{ test.output.file }}"
+        line: "check ceph monitors health = passed"
+        create:
+      when: ((cluster_status.stdout|from_json).health.status == "HEALTH_OK")
+      delegate_to: undercloud-0
       run_once: yes
       tags:
         - cluster

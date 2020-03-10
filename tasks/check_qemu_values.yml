@@ -5,8 +5,7 @@
     line: "max_files = 32768"
     state: present
   check_mode: yes
-  register: conf
-  failed_when: (conf is changed) or (conf is failed)
+  register: max_files
   tags:
     - compute
     - file_contents
@@ -17,8 +16,21 @@
     line: "max_processes = 131072"
     state: present
   check_mode: yes
-  register: conf
-  failed_when: (conf is changed) or (conf is failed)
+  register: max_processes
   tags:
     - compute
     - file_contents
+
+- name: valiedate max_files and max_processes values - failed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "Validate the default values of max_files & max_processes parameters in /etc/libvirt/qemu.conf = failed"
+  delegate_to: undercloud-0
+  when: (max_files is changed) or (max_files is failed) or (max_processes is changed) or (max_processes is failed)
+
+- name: valiedate max_files and max_processes values - passed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "Validate the default values of max_files & max_processes parameters in /etc/libvirt/qemu.conf = passed"
+  delegate_to: undercloud-0
+  when: (max_files is not changed) and (max_files is not failed) and (max_processes is not changed) and (max_processes is not failed)

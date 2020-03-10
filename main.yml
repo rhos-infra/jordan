@@ -2,6 +2,8 @@
 #TODO implement on-the-fly - include: "{{ ceph_reg_provider | default('ceph_reg_provider.yml') }}"
 #TODO Consider using "import_task" and passing an argument (calculate the registry provider here)
 
+- import_playbook: "{{ initialize_log | default('initialize_results_file.yml')}}"
+
 - import_playbook: "{{ cluster_check | default('cluster.yml') }}"
 
 - import_playbook: "{{ monitor_check | default('monitors.yml') }}"

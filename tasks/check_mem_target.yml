@@ -5,5 +5,18 @@
     line: "osd memory target = {{ osd_memory_target }}"
     state: present
   check_mode: yes
-  register: conf
-  failed_when: (conf is changed) or (conf is failed)
+  register: osd_memory_target
+
+- name: is osd memory target the correct calculated value - failed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "check OSD memory target = failed"
+  delegate_to: undercloud-0
+  when: (osd_memory_target is changed) or (osd_memory_target is failed)
+
+- name: is osd memory target the correct calculated value - passed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "check OSD memory target = passed"
+  delegate_to: undercloud-0
+  when: (osd_memory_target is not changed) and (osd_memory_target is not failed)

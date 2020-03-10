@@ -1,0 +1,15 @@
+---
+- name: initialize test results file
+  hosts: undercloud-0
+  tasks:
+    - name: delete old jordan-result.out file if exsist
+      file:
+        path: "{{ test.output.file }}"
+        state: absent
+      ignore_errors: True
+  
+    - name: create test file jordan-results.out
+      file:
+        path: "{{ test.output.file }}"
+        state: touch
+        mode: "u=rw,g=r,o=r"

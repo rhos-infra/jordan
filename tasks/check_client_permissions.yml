@@ -1,41 +1,78 @@
 ---
+<<<<<<< HEAD
 - name: validate client read permissions on monitors (ceph2)
   fail:
     msg: "The client's permissions are incorrectly set"
   when: not (client_info.stdout|from_json)[0].caps.mon is search("allow r")
+=======
+- name: validate client read permissions on monitors - failed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "Check ceph client permissions = failed"
+  delegate_to: undercloud-0
+  when: not (client_info.stdout|from_json)[0].caps.mon is search("allow r") or not (client_info.stdout|from_json)[0].caps.osd is search("allow rwx pool={{ item }}" )
+>>>>>>> f0431e3... add jordan-results.out file and submitting results
   tags:
     - clients
     - sanity
     - ceph-2
 
+<<<<<<< HEAD
 - name: check client permissions on pool (ceph2)
   fail:
     msg: 'the client {{ test.openstack.client.name }} does not have the right permissions on pool {{ item }}'
   when: not (client_info.stdout|from_json)[0].caps.osd is search("allow rwx pool={{ item }}" )
   run_once: yes
+=======
+- name: validate client read permissions on monitors - passed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "Check ceph client permissions = passed"
+  delegate_to: undercloud-0
+  when: (client_info.stdout|from_json)[0].caps.mon is search("allow r") and (client_info.stdout|from_json)[0].caps.osd is search("allow rwx pool={{ item }}" )
+>>>>>>> f0431e3... add jordan-results.out file and submitting results
   tags:
     - clients
     - sanity
     - ceph-2
 
+<<<<<<< HEAD
 - name: validate client read permissions on manager (ceph3)
   fail:
     msg: "The client's permissions are incorrectly set"
   when: not (client_info.stdout|from_json)[0].caps.mgr is search("allow *")
+=======
+- name: validate client read permissions on manager - failed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "Check ceph client permissions = failed"
+  delegate_to: undercloud-0
+  when: not (client_info.stdout|from_json)[0].caps.mgr is search("allow *") or not (client_info.stdout|from_json)[0].caps.mon is search("profile rbd") or not (client_info.stdout|from_json)[0].caps.osd is search("profile rbd pool={{ item }}" )
+>>>>>>> f0431e3... add jordan-results.out file and submitting results
   tags:
     - clients
     - sanity
     - ceph-3
 
+<<<<<<< HEAD
 - name: validate client read permissions on monitors (ceph3)
   fail:
     msg: "The client's permissions are incorrectly set"
   when: not (client_info.stdout|from_json)[0].caps.mon is search("profile rbd")
+=======
+- name: validate client read permissions on manager - passed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "Check ceph client permissions = failed"
+  delegate_to: undercloud-0
+  when: (client_info.stdout|from_json)[0].caps.mgr is search("allow *") and (client_info.stdout|from_json)[0].caps.mon is search("profile rbd") and (client_info.stdout|from_json)[0].caps.osd is search("profile rbd pool={{ item }}" )
+>>>>>>> f0431e3... add jordan-results.out file and submitting results
   tags:
     - clients
     - sanity
     - ceph-3
 
+<<<<<<< HEAD
 - name: check client permissions on pool (ceph3)
   fail:
     msg: 'the client {{ test.openstack.client.name }} does not have the right permissions on pool {{ item }}'
@@ -59,16 +96,33 @@
   fail:
     msg: "The client's permissions are incorrectly set"
   when: not (client_info.stdout|from_json)[0].caps.mon is search("profile rbd")
+=======
+- name: validate client read permissions on manager - failed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "Check ceph client permissions = failed"
+  delegate_to: undercloud-0
+  when: not (client_info.stdout|from_json)[0].caps.mgr is search("allow *") or not (client_info.stdout|from_json)[0].caps.mon is search("profile rbd") or not (client_info.stdout|from_json)[0].caps.osd is search("profile rbd pool={{ item }}" )
+>>>>>>> f0431e3... add jordan-results.out file and submitting results
   tags:
     - clients
     - sanity
     - ceph-4
 
+<<<<<<< HEAD
 - name: check client permissions on pool (ceph4)
   fail:
     msg: 'the client {{ test.openstack.client.name }} does not have the right permissions on pool {{ item }}'
   when: not (client_info.stdout|from_json)[0].caps.osd is search("profile rbd pool={{ item }}" )
   run_once: yes
+=======
+- name: validate client read permissions on manager - passed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "Check ceph client permissions = passed"
+  delegate_to: undercloud-0
+  when: (client_info.stdout|from_json)[0].caps.mgr is search("allow *") and (client_info.stdout|from_json)[0].caps.mon is search("profile rbd") and (client_info.stdout|from_json)[0].caps.osd is search("profile rbd pool={{ item }}" )
+>>>>>>> f0431e3... add jordan-results.out file and submitting results
   tags:
     - clients
     - sanity
