@@ -1,0 +1,88 @@
+---
+- name: is grafana container endpoint correct
+  lineinfile:
+    path: /usr/share/openstack-tripleo-common/container-images/overcloud_containers.yaml
+    line: "- imagename: registry.redhat.io/rhceph/rhceph-3-dashboard-rhel7:3"
+    state: present
+  check_mode: yes
+  register: grafana
+
+- name: is grafana container endpoint correct - failed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "is grafana container endpoint correct - failed"
+  delegate_to: undercloud-0
+  when: (grafana is changed) or (grafana is failed)
+
+- name: is grafana container endpoint correct - passed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "is grafana container endpoint correct - passed"
+  delegate_to: undercloud-0
+  when: (grafana is not changed) or (grafana is not failed)
+
+- name: is promethus container endpoint correct
+  lineinfile:
+    path: /usr/share/openstack-tripleo-common/container-images/overcloud_containers.yaml
+    line: "- imagename: registry.redhat.io/openshift4/ose-prometheus:4.1"
+    state: present
+  check_mode: yes
+  register: promethus
+
+- name: is promethus container endpoint correct - failed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "is promethus container endpoint correct - failed"
+  delegate_to: undercloud-0
+  when: (promethus is changed) or (promethus is failed)
+
+  - name: is promethus container endpoint correct - passed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "is promethus container endpoint correct - passed"
+  delegate_to: undercloud-0
+  when: (promethus is not changed) or (promethus is not failed)
+
+- name: is promethus alertmanager container endpoint correct
+  lineinfile:
+    path: /usr/share/openstack-tripleo-common/container-images/overcloud_containers.yaml
+    line: "- imagename: registry.redhat.io/openshift4/ose-prometheus-alertmanager:4.1"
+    state: present
+  check_mode: yes
+  register: alertmanager
+
+- name: is promethus alertmanager container endpoint correct - failed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "is promethus alertmanager container endpoint correct - failed"
+  delegate_to: undercloud-0
+  when: (alertmanager is changed) or (alertmanager is failed)
+
+- name: is promethus alertmanager container endpoint correct - passed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "is promethus alertmanager container endpoint correct - passed"
+  delegate_to: undercloud-0
+  when: (alertmanager is not changed) or (alertmanager is not failed)  
+
+- name: is promethus node exporter container endpoint correct
+  lineinfile:
+    path: /usr/share/openstack-tripleo-common/container-images/overcloud_containers.yaml
+    line: "- imagename: registry.redhat.io/openshift4/ose-prometheus-node-exporter:v4.1"
+    state: present
+  check_mode: yes
+  register: exporter
+
+- name: is promethus node exporter container endpoint correct - failed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "is promethus node exporter container endpoint correct - failed"
+  delegate_to: undercloud-0
+  when: (exporter is changed) or (exporter is failed)
+
+- name: is promethus node exporter container endpoint correct - passed
+  lineinfile:
+    path: "{{ test.output.file }}"
+    line: "is promethus node exporter container endpoint correct - passed"
+  delegate_to: undercloud-0
+  when: (exporter is not changed) or (exporter is not failed)
