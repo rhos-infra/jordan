@@ -36,7 +36,7 @@
   delegate_to: undercloud-0
   when: (promethus is changed) or (promethus is failed)
 
-  - name: is promethus container endpoint correct - passed
+- name: is promethus container endpoint correct - passed
   lineinfile:
     path: "{{ test.output.file }}"
     line: "is promethus container endpoint correct - passed"
