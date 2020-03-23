@@ -6,8 +6,6 @@
 
 - import_playbook: "{{ cluster_check | default('cluster.yml') }}"
 
-- import_playbook: "{{ monitor_check | default('monitors.yml') }}"
-
 - import_playbook: "{{ osds_check | default('osds.yml') }}"
 
 - import_playbook: "{{ pools_check | default('pools.yml') }}"
