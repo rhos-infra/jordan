@@ -3,7 +3,6 @@
 Jordan is an Infrared plugin testing the Ceph cluster, its state, its configuration and its topology.
 The tests are separated by sections, defined by `main.yml`:
   - overall cluster state (`cluster.yml`)
-  - monitors state (`monitors.yml`)
   - OSDs state (`osds.yml`)
   - pool configuration (`pools.yml`)
   - client permissions (`clients.yml`)
