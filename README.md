@@ -1,6 +1,6 @@
 # Jordan
 
-Jordan is an Infrared plugin testing the Ceph cluster, its state, its configuration and its topology.
+Jordan is an Infrared plugin testing a RHOSP Director-deployed Ceph cluster, its state, its configuration, and its topology.
 The tests are separated by sections, defined by `main.yml`:
   - overall cluster state (`cluster.yml`)
   - OSDs state (`osds.yml`)
