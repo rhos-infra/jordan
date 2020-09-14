@@ -1,5 +1,5 @@
 ---
-- name: Check cluster status
+- name: Check cluster status in a noncontainerized environment
   hosts: "{{ test.monitor.nodes }}"
   tasks:
     - name: collect Ceph cluster status
@@ -10,6 +10,7 @@
       tags:
         - sanity
         - non-containerized
+  # TODO: Add tasks for logging success/failure for noncontainerized health check (ceph2)
 
 - name: Check cluster status in a containerized environment
   hosts: "{{ test.monitor.nodes }}"
@@ -23,7 +24,7 @@
         - sanity
         - containerized
 
-    - name: Cluster health check for ceph 3 failed
+    - name: cluster health check for ceph 3 - failed
       lineinfile:
         path: "{{ test.output.file }}"
         line: "check ceph monitors health = failed"
@@ -35,7 +36,7 @@
         - sanity
         - ceph-3
     
-    - name: Cluster health check for ceph 3 passed
+    - name: cluster health check for ceph 3 - passed
       lineinfile:
         path: "{{ test.output.file }}"
         line: "check ceph monitors health = passed"
@@ -47,7 +48,7 @@
         - sanity
         - ceph-3
 
-    - name: Cluster health check for ceph 4 failed
+    - name: cluster health check for ceph 4 - failed
       register: health_check
       lineinfile:
         path: "{{ test.output.file }}"
@@ -60,12 +61,11 @@
         - sanity
         - ceph-4
 
-    - name: Cluster health check for ceph 4 passed
+    - name: cluster health check for ceph 4 - passed
       register: health_check
       lineinfile:
         path: "{{ test.output.file }}"
         line: "check ceph monitors health = passed"
-        create:
       when: ((cluster_status.stdout|from_json).health.status == "HEALTH_OK")
       delegate_to: undercloud-0
       run_once: yes
