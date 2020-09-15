@@ -3,7 +3,7 @@
   hosts: "{{ test.monitor.nodes }}"
   tasks:
     - name: collect Ceph cluster status
-      shell: "ceph status --format json"
+      shell: "ceph status --cluster {{test.cluster.name}} --format json"
       become: true
       register: cluster_status
       run_once: yes
@@ -16,7 +16,7 @@
   hosts: "{{ test.monitor.nodes }}"
   tasks:
     - name: collect Ceph cluster status
-      shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph --status --format json"
+      shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph --cluster {{test.cluster.name}} --status --format json"
       become: true
       register: cluster_status
       run_once: yes

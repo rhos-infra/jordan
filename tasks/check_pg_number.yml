@@ -1,6 +1,6 @@
 ---
 - name: get pool's pg_num (non-containerized)
-  shell: "ceph osd pool get {{ item }} pg_num --format json"
+  shell: "ceph --cluster {{test.cluster.name}} osd pool get {{ item }} pg_num --format json"
   become: true
   run_once: yes
   register: pg_num
@@ -8,7 +8,7 @@
     - non-containerized
 
 - name: get pool's pg_num (containerized)
-  shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} pg_num --format json"
+  shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph --cluster {{test.cluster.name}} osd pool get {{ item }} pg_num --format json"
   become: true
   run_once: yes
   register: pg_num
@@ -32,7 +32,7 @@
   run_once: yes
 
 - name: get pool's pgp_num (non-containerized)
-  shell: "ceph osd pool get {{ item }} pgp_num --format json"
+  shell: "ceph --cluster {{test.cluster.name}} osd pool get {{ item }} pgp_num --format json"
   become: true
   run_once: yes
   register: pgp_num
@@ -40,7 +40,7 @@
     - non-containerized
 
 - name: get pool's pg_num (containerized)
-  shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd pool get {{ item }} pgp_num --format json"
+  shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph --cluster {{test.cluster.name}} osd pool get {{ item }} pgp_num --format json"
   become: true
   run_once: yes
   register: pgp_num

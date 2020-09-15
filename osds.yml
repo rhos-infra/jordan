@@ -25,7 +25,7 @@
         - sanity
 
     - name: get osds list (ceph2)
-      shell: "ceph osd tree --format json"
+      shell: "ceph --cluster {{test.cluster.name}} osd tree --format json"
       become: true
       register: osds_list
       run_once: yes
@@ -35,7 +35,7 @@
         - non-containerized
 
     - name: get osds list (ceph3)
-      shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd tree --format json"
+      shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph --cluster {{test.cluster.name}} osd tree --format json"
       become: true
       register: osds_list
       run_once: yes
@@ -46,7 +46,7 @@
         - ceph-3
 
     - name: get osds list (ceph4)
-      shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph osd tree --format json"
+      shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph --cluster {{test.cluster.name}} osd tree --format json"
       become: true
       register: osds_list
       run_once: yes

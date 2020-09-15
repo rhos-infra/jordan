@@ -3,7 +3,7 @@
   hosts: "{{ test.monitor.nodes }}"
   tasks:
     - name: get openstack's services client details
-      shell: 'ceph auth get client.openstack --format json'
+      shell: 'ceph --cluster {{test.cluster.name}} auth get client.openstack --format json'
       become: true
       register: client_info
       run_once: yes
@@ -13,7 +13,7 @@
         - non-containerized
 
     - name: get openstack's services client details
-      shell: '{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph auth get client.openstack --format json'
+      shell: '{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph --cluster {{test.cluster.name}} auth get client.openstack --format json'
       become: true
       register: client_info
       run_once: yes
