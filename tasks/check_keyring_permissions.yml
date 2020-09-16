@@ -1,7 +1,7 @@
 ---
 - name: get ceph keyring permission mask
   stat:
-    path: /etc/ceph/ceph.client.openstack.keyring
+    path: /etc/ceph/{{test.cluster.name}}.client.{{test.openstack.client.name}}.keyring
   register: st
 
 # - name: Write stat module result for keyring file to console
