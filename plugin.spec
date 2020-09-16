@@ -11,6 +11,11 @@ subparsers:
                     type: Value
                     help: Ceph's major version
                     default: '3'
+
+                cluster-name:
+                    type: Value
+                    help: Cluster name
+                    default: 'ceph'
                     
           - title: Ceph monitor nodes
             options:
