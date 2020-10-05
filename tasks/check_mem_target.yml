@@ -1,7 +1,7 @@
 ---
 - name: is osd memory target the correct calculated value
   lineinfile:
-    path: /etc/ceph/ceph.conf
+    path: /etc/ceph/{{test.cluster.name}}.conf
     line: "osd memory target = {{ osd_memory_target }}"
     state: present
   check_mode: yes
