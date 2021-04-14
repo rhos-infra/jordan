@@ -1,0 +1,49 @@
+---
+- name: Get ceph version
+  hosts: undercloud-0
+  tasks:
+    - name: register Ceph version
+      shell: "{{test.ceph.reg.provider}} exec ceph-mon-`hostname -s` ceph --cluster {{test.cluster.name}} --version | awk '{print$3}'"
+      become: true
+      register: ceph_version
+      run_once: yes
+      tags:
+        - sanity
+        - containerized
+
+    - name: print Ceph version
+      debug:
+        msg: "Build Mark: ceph_version={{ceph_version.stdout}}"
+
+    - name: log Ceph version
+      lineinfile:
+        path: "{{ test.output.file }}"
+        line: "ceph_version={{ceph_version.stdout}}"
+      delegate_to: undercloud-0
+      run_once: yes
+      tags:
+        - sanity
+        - containerized
+
+    - name: get packages from undercloud
+      package_facts:
+        manager: "auto"
+
+    - name: print the package facts
+      debug:
+        var: ansible_facts.packages
+
+    - name: print ceph-ansible rpm version
+      debug:
+        msg: "{{ ansible_facts.packages['ceph-ansible'].0.version }}"
+      when: "'ceph-ansible' in ansible_facts.packages"
+
+    - name: log Ceph-Ansible version
+      lineinfile:
+        path: "{{ test.output.file }}"
+        line: "ceph_ansible_version={{ ansible_facts.packages['ceph-ansible'].0.version }}"
+      delegate_to: undercloud-0
+      run_once: yes
+      tags:
+        - sanity
+        - containerized
