@@ -4,6 +4,8 @@
 
 - import_playbook: "{{ initialize_log | default('initialize_results_file.yml')}}"
 
+- import_playbook: "{{ get_ceph_version | default('get_ceph_version.yml') }}"
+
 - import_playbook: "{{ cluster_check | default('cluster.yml') }}"
 
 - import_playbook: "{{ osds_check | default('osds.yml') }}"
